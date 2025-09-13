@@ -14,7 +14,132 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      achievements: {
+        Row: {
+          athlete_id: string
+          badge_name: string
+          badge_type: string
+          description: string | null
+          earned_at: string
+          id: string
+          test_submission_id: string | null
+        }
+        Insert: {
+          athlete_id: string
+          badge_name: string
+          badge_type: string
+          description?: string | null
+          earned_at?: string
+          id?: string
+          test_submission_id?: string | null
+        }
+        Update: {
+          athlete_id?: string
+          badge_name?: string
+          badge_type?: string
+          description?: string | null
+          earned_at?: string
+          id?: string
+          test_submission_id?: string | null
+        }
+        Relationships: []
+      }
+      fitness_test_submissions: {
+        Row: {
+          ai_analysis: Json | null
+          athlete_id: string
+          id: string
+          performance_metrics: Json | null
+          review_notes: string | null
+          reviewed_at: string | null
+          reviewed_by: string | null
+          status: Database["public"]["Enums"]["submission_status"] | null
+          submitted_at: string
+          test_type: Database["public"]["Enums"]["fitness_test_type"]
+          video_url: string
+        }
+        Insert: {
+          ai_analysis?: Json | null
+          athlete_id: string
+          id?: string
+          performance_metrics?: Json | null
+          review_notes?: string | null
+          reviewed_at?: string | null
+          reviewed_by?: string | null
+          status?: Database["public"]["Enums"]["submission_status"] | null
+          submitted_at?: string
+          test_type: Database["public"]["Enums"]["fitness_test_type"]
+          video_url: string
+        }
+        Update: {
+          ai_analysis?: Json | null
+          athlete_id?: string
+          id?: string
+          performance_metrics?: Json | null
+          review_notes?: string | null
+          reviewed_at?: string | null
+          reviewed_by?: string | null
+          status?: Database["public"]["Enums"]["submission_status"] | null
+          submitted_at?: string
+          test_type?: Database["public"]["Enums"]["fitness_test_type"]
+          video_url?: string
+        }
+        Relationships: []
+      }
+      profiles: {
+        Row: {
+          created_at: string
+          date_of_birth: string | null
+          full_name: string
+          gender: string | null
+          id: string
+          is_verified: boolean | null
+          phone: string | null
+          preferred_language: string | null
+          profile_image_url: string | null
+          region: string | null
+          role: Database["public"]["Enums"]["user_role"]
+          sport_category: Database["public"]["Enums"]["sport_category"] | null
+          updated_at: string
+          user_id: string
+          verification_document_url: string | null
+        }
+        Insert: {
+          created_at?: string
+          date_of_birth?: string | null
+          full_name: string
+          gender?: string | null
+          id?: string
+          is_verified?: boolean | null
+          phone?: string | null
+          preferred_language?: string | null
+          profile_image_url?: string | null
+          region?: string | null
+          role?: Database["public"]["Enums"]["user_role"]
+          sport_category?: Database["public"]["Enums"]["sport_category"] | null
+          updated_at?: string
+          user_id: string
+          verification_document_url?: string | null
+        }
+        Update: {
+          created_at?: string
+          date_of_birth?: string | null
+          full_name?: string
+          gender?: string | null
+          id?: string
+          is_verified?: boolean | null
+          phone?: string | null
+          preferred_language?: string | null
+          profile_image_url?: string | null
+          region?: string | null
+          role?: Database["public"]["Enums"]["user_role"]
+          sport_category?: Database["public"]["Enums"]["sport_category"] | null
+          updated_at?: string
+          user_id?: string
+          verification_document_url?: string | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
@@ -23,7 +148,22 @@ export type Database = {
       [_ in never]: never
     }
     Enums: {
-      [_ in never]: never
+      fitness_test_type:
+        | "vertical_jump"
+        | "pushups"
+        | "situps"
+        | "squats"
+        | "shuttle_run"
+        | "endurance_run"
+      sport_category:
+        | "athletics"
+        | "football"
+        | "cricket"
+        | "basketball"
+        | "volleyball"
+        | "other"
+      submission_status: "pending" | "approved" | "rejected" | "processing"
+      user_role: "athlete" | "official"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -150,6 +290,25 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      fitness_test_type: [
+        "vertical_jump",
+        "pushups",
+        "situps",
+        "squats",
+        "shuttle_run",
+        "endurance_run",
+      ],
+      sport_category: [
+        "athletics",
+        "football",
+        "cricket",
+        "basketball",
+        "volleyball",
+        "other",
+      ],
+      submission_status: ["pending", "approved", "rejected", "processing"],
+      user_role: ["athlete", "official"],
+    },
   },
 } as const
